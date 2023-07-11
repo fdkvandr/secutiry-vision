@@ -16,9 +16,6 @@ public class OrganizationController {
 
     @PostMapping("/reference/create")
     public String create(@RequestBody OrganizationDto organizationDto) {
-        System.out.println(organizationDto.reference().name());
-        String response =  organizationService.create(organizationDto);
-        System.out.println(response);
-        return response;
+        return organizationService.create(organizationDto);
     }
 }
