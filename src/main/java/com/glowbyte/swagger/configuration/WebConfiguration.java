@@ -2,19 +2,35 @@ package com.glowbyte.swagger.configuration;
 
 
 import com.glowbyte.swagger.service.SecurityVisionClient;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import reactor.netty.http.client.HttpClient;
+
+import javax.net.ssl.SSLException;
 
 @Configuration
 public class WebConfiguration {
 
     @Bean
-    public WebClient webClient() {
-        return WebClient.builder().build();
+    public WebClient webClient() throws SSLException {
+        // Only for development. Disable SSL checks
+        SslContext sslContext = SslContextBuilder
+                .forClient()
+                .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                .build();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+
+        return WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .build();
     }
 
     @Bean
