@@ -3,6 +3,7 @@ package com.glowbyte.swagger.dto;
 import java.util.List;
 
 public record OrganizationDto(
+
         Reference reference,
         List<Properties> properties) {
 
