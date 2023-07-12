@@ -1,13 +1,5 @@
 server:
   port: 10000
-#  ssl:
-#    key-password: changeit
-#    key-store: C:/Users/kirill.trubkin/IdeaProjects/swagger/src/main/resources/ssl-server.jks
-#    key-store-provider: SUN
-#    protocol: TLS
-#    enabled-protocols: TLSv1.2
 
-
-
-
-
+sv-param:
+  sv-token: QhzLSlW/8xUNIAq1f9wOdNMq0erGxATsoDQx7y6xlzRPPXRoLMVAZygXV4DYrX16892FvFxPKlcqJ35NyUKuDvKCcMKn4wMIZVnBoyNBtY6faaHVKzfSSa0eF3ojEu3jPsQUB1o68Dgja+ZS3OS+GuAvQZOKvYgBbVOhQLLRdW0=
