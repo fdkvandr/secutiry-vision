@@ -12,9 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(WebClientResponseException.class)
-    protected ResponseEntity<Object> handleWebClientResponseException(
-            WebClientResponseException ex) {
-
+    protected ResponseEntity<Object> handleWebClientResponseException(WebClientResponseException ex) {
         log.error(ex.getClass().getCanonicalName(), ex);
         return new ResponseEntity<>(ex.getMessage(), ex.getHeaders(), ex.getStatusCode());
     }
