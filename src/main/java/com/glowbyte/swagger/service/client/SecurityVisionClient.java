@@ -1,6 +1,5 @@
-package com.glowbyte.swagger.service;
+package com.glowbyte.swagger.service.client;
 
-import com.glowbyte.swagger.dto.OrganisationResponseDto;
 import com.glowbyte.swagger.dto.OrganizationDto;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.HttpExchange;
@@ -10,5 +9,5 @@ import org.springframework.web.service.annotation.PostExchange;
 public interface SecurityVisionClient {
 
     @PostExchange("https://158.160.23.243:8080/api/reference/create")
-    OrganisationResponseDto createOrganization(@RequestBody OrganizationDto organizationDto);
+    String createOrganization(@RequestBody OrganizationDto organizationDto);
 }

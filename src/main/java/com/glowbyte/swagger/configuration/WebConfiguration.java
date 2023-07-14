@@ -1,7 +1,7 @@
 package com.glowbyte.swagger.configuration;
 
 
-import com.glowbyte.swagger.service.SecurityVisionClient;
+import com.glowbyte.swagger.service.client.SecurityVisionClient;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;

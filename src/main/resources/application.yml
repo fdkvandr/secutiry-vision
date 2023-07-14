@@ -3,3 +3,7 @@ server:
 
 sv-param:
   sv-token: QhzLSlW/8xUNIAq1f9wOdNMq0erGxATsoDQx7y6xlzRPPXRoLMVAZygXV4DYrX16892FvFxPKlcqJ35NyUKuDvKCcMKn4wMIZVnBoyNBtY6faaHVKzfSSa0eF3ojEu3jPsQUB1o68Dgja+ZS3OS+GuAvQZOKvYgBbVOhQLLRdW0=
+springdoc:
+  swagger-ui:
+    url: api-docs
+    disable-swagger-default-url: true
