@@ -14,6 +14,8 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(WebClientResponseException.class)
     protected ResponseEntity<Object> handleWebClientResponseException(WebClientResponseException ex) {
         log.error(ex.getClass().getCanonicalName(), ex);
-        return new ResponseEntity<>(ex.getMessage(), ex.getHeaders(), ex.getStatusCode());
+        return ResponseEntity.status(ex.getStatusCode())
+                .headers(ex.getHeaders())
+                .body(ex.getMessage());
     }
 }
