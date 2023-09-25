@@ -1,11 +1,8 @@
 package com.glowbyte.swagger.configuration;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -16,14 +13,6 @@ import java.security.cert.X509Certificate;
 
 @Configuration
 public class WebConfiguration {
-
-    @Bean
-    public HttpHeaders defaultHttpHeaders(@Value("${sv-param.sv-token}") String svToken) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.set("sv-token", svToken);
-        return httpHeaders;
-    }
 
     @Bean
     public RestTemplate restTemplate() {

@@ -16,15 +16,18 @@ public class MainService {
     private final RestTemplate restTemplate = new RestTemplate();
     @Value("${sv-param.default-url}")
     private final String defaultUrl;
-    private final HttpHeaders defaultHttpHeaders;
 
-    public ResponseEntity<?> getMethod(String path) {
-        HttpEntity<Void> entity = new HttpEntity<>(defaultHttpHeaders);
+    public ResponseEntity<?> getMethod(String path, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("sv-token", token);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
         return restTemplate.exchange(defaultUrl + path, HttpMethod.GET, entity, String.class);
     }
 
-    public ResponseEntity<?> postMethod(String path, String request) {
-        HttpEntity<String> entity = new HttpEntity<>(request, defaultHttpHeaders);
+    public ResponseEntity<?> postMethod(String path, String request, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("sv-token", token);
+        HttpEntity<String> entity = new HttpEntity<>(request, headers);
         return restTemplate.exchange(defaultUrl + path, HttpMethod.POST, entity, String.class);
     }
 }
