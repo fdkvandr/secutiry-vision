@@ -1,47 +1,48 @@
 package com.glowbyte.swagger.configuration;
 
 
-import com.glowbyte.swagger.service.client.SecurityVisionClient;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-import reactor.netty.http.client.HttpClient;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLException;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.X509TrustManager;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 
 @Configuration
 public class WebConfiguration {
 
     @Bean
-    public WebClient webClient(@Value("${sv-param.sv-token}") String svToken) throws SSLException {
-        // Only for development. Disable SSL checks
-        SslContext sslContext = SslContextBuilder
-                .forClient()
-                .trustManager(InsecureTrustManagerFactory.INSTANCE)
-                .build();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
-
-        return WebClient.builder()
-                .defaultHeader("sv-token", svToken)
-                .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .build();
+    public HttpHeaders defaultHttpHeaders(@Value("${sv-param.sv-token}") String svToken) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.set("sv-token", svToken);
+        return httpHeaders;
     }
 
     @Bean
-    public SecurityVisionClient securityVisionClient(final WebClient webClient, final ConfigurableBeanFactory configurableBeanFactory) {
-        WebClientAdapter webClientAdapter = WebClientAdapter.forClient(webClient);
-        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builder(webClientAdapter)
-                .embeddedValueResolver(configurableBeanFactory::resolveEmbeddedValue)
-                .build();
-
-        return httpServiceProxyFactory.createClient(SecurityVisionClient.class);
+    public RestTemplate restTemplate() {
+        try {
+            HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, new X509TrustManager[]{new X509TrustManager(){
+                public void checkClientTrusted(X509Certificate[] chain,
+                        String authType) {}
+                public void checkServerTrusted(X509Certificate[] chain,
+                        String authType) {}
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }}}, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(
+                    context.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new RestTemplate();
     }
 }

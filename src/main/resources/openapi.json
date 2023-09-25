@@ -1,1384 +1,146 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Swagger Petstore - OpenAPI 13.0",
-    "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
-    "termsOfService": "http://swagger.io/terms/",
+    "title": "Security Vision - OpenAPI 3.0",
+    "description": "В данном разделе приведено описание методов API.\n\nВсе методы API работают по стандарту REST. Формат запросов и ответов: JSON.\n\nМетоды API функционируют на Сервисе API (webapi): приложении для функционирования методов API, которое обрабатывает запросы, приходящие от веб-приложения или от внешних систем. Для приема запросов к методам API из внешних систем используется отдельный компонент API. Данный компонент принимает запросы к методам API от внешних систем, обогащает их и перенаправляет в Сервис API (webapi).",
     "contact": {
-      "email": "apiteam@swagger.io"
+      "email": "aleksandr.tolmachev@glowbyteconsulting.com"
     },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.11"
+    "version": "1.0.1"
   },
   "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
+    "description": "Руководство администратора по API",
+    "url": "https://158.160.23.243:8080/assets/docs/html/app_admin_guide/index.html?api.html"
   },
   "servers": [
     {
-      "url": "https://petstore3.swagger.io/api/v3"
+      "url": "http://localhost:10000"
     }
   ],
   "tags": [
     {
-      "name": "pet",
-      "description": "Everything about your Pets",
+      "name": "Объект",
+      "description": "Действия с объектами",
       "externalDocs": {
         "description": "Find out more",
         "url": "http://swagger.io"
       }
     },
     {
-      "name": "store",
-      "description": "Access to Petstore orders",
+      "name": "Справочник",
+      "description": "Действия со справочниками",
       "externalDocs": {
-        "description": "Find out more about our store",
+        "description": "Find out more",
         "url": "http://swagger.io"
       }
     },
     {
-      "name": "user",
-      "description": "Operations about user"
+      "name": "Рабочий процесс",
+      "description": "Действия с рабочими процессами",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
     }
   ],
   "paths": {
-    "/pet": {
-      "put": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Update an existing pet",
-        "description": "Update an existing pet by Id",
-        "operationId": "updatePet",
-        "requestBody": {
-          "description": "Update an existent pet in the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
+    "/api/entity/create": {
       "post": {
         "tags": [
-          "pet"
+          "Объект"
         ],
-        "summary": "Add a new pet to the store",
-        "description": "Add a new pet to the store",
-        "operationId": "addPet",
+        "summary": "Создание объекта",
+        "description": "Метод создает объект определенного типа с заполненными свойствами. В запросе можно указать свойства и соответствующие значения, с которыми будет создан объект. В ответе на запрос возвращается ID созданного объекта. При создании объекта к нему применяются правила Автозаполнения, Валидации, Видимости и доступности, Правил группировки, настроенные для соответствующего типа объекта.",
+        "operationId": "entity_create",
         "requestBody": {
-          "description": "Create a new pet in the store",
+          "description": "Структура запроса",
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "required": [
-                  "name",
-                  "photoUrls"
-                ],
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "doggie"
-                  },
-                  "category": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "Dogs"
-                      }
-                    },
-                    "xml": {
-                      "name": "category"
-                    }
-                  },
-                  "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "string",
-                      "xml": {
-                        "name": "photoUrl"
-                      }
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "xml": {
-                      "wrapped": true
-                    },
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "xml": {
-                        "name": "tag"
-                      }
-                    }
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": [
-                      "available",
-                      "pending",
-                      "sold"
-                    ]
-                  }
-                },
-                "xml": {
-                  "name": "pet"
-                }
+                "$ref": "#/components/schemas/entity_create"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
-          "200": {
-            "description": "Successful operation",
+          "201": {
+            "description": "Если успешно создан новый объект, то в ответе возвращается идентификатор созданного объекта",
             "content": {
               "application/json": {
                 "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
-                }
-              }
-            }
-          },
-          "405": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByStatus": {
-      "get": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Finds Pets by status",
-        "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
-            "required": false,
-            "explode": true,
-            "schema": {
-              "type": "string",
-              "default": "available",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "name",
-                      "photoUrls"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 10
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "doggie"
-                      },
-                      "category": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "example": 1
-                          },
-                          "name": {
-                            "type": "string",
-                            "example": "Dogs"
-                          }
-                        },
-                        "xml": {
-                          "name": "category"
-                        }
-                      },
-                      "photoUrls": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "string",
-                          "xml": {
-                            "name": "photoUrl"
-                          }
-                        }
-                      },
-                      "tags": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64"
-                            },
-                            "name": {
-                              "type": "string"
-                            }
-                          },
-                          "xml": {
-                            "name": "tag"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "pet status in the store",
-                        "enum": [
-                          "available",
-                          "pending",
-                          "sold"
-                        ]
-                      }
-                    },
-                    "xml": {
-                      "name": "pet"
-                    }
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "name",
-                      "photoUrls"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 10
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "doggie"
-                      },
-                      "category": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "example": 1
-                          },
-                          "name": {
-                            "type": "string",
-                            "example": "Dogs"
-                          }
-                        },
-                        "xml": {
-                          "name": "category"
-                        }
-                      },
-                      "photoUrls": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "string",
-                          "xml": {
-                            "name": "photoUrl"
-                          }
-                        }
-                      },
-                      "tags": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64"
-                            },
-                            "name": {
-                              "type": "string"
-                            }
-                          },
-                          "xml": {
-                            "name": "tag"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "pet status in the store",
-                        "enum": [
-                          "available",
-                          "pending",
-                          "sold"
-                        ]
-                      }
-                    },
-                    "xml": {
-                      "name": "pet"
-                    }
-                  }
+                  "$ref": "#/components/schemas/entity_create_success"
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid status value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByTags": {
-      "get": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Finds Pets by tags",
-        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-        "operationId": "findPetsByTags",
-        "parameters": [
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "Tags to filter by",
-            "required": false,
-            "explode": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
+            "description": "Если не заполнены обязательные входные параметры, то возвращается результат с ошибкой и с перечислением входных параметров, которые необходимо заполнить:",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "name",
-                      "photoUrls"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 10
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "doggie"
-                      },
-                      "category": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "example": 1
-                          },
-                          "name": {
-                            "type": "string",
-                            "example": "Dogs"
-                          }
-                        },
-                        "xml": {
-                          "name": "category"
-                        }
-                      },
-                      "photoUrls": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "string",
-                          "xml": {
-                            "name": "photoUrl"
-                          }
-                        }
-                      },
-                      "tags": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64"
-                            },
-                            "name": {
-                              "type": "string"
-                            }
-                          },
-                          "xml": {
-                            "name": "tag"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "pet status in the store",
-                        "enum": [
-                          "available",
-                          "pending",
-                          "sold"
-                        ]
-                      }
-                    },
-                    "xml": {
-                      "name": "pet"
-                    }
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "name",
-                      "photoUrls"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 10
-                      },
-                      "name": {
-                        "type": "string",
-                        "example": "doggie"
-                      },
-                      "category": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "example": 1
-                          },
-                          "name": {
-                            "type": "string",
-                            "example": "Dogs"
-                          }
-                        },
-                        "xml": {
-                          "name": "category"
-                        }
-                      },
-                      "photoUrls": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "string",
-                          "xml": {
-                            "name": "photoUrl"
-                          }
-                        }
-                      },
-                      "tags": {
-                        "type": "array",
-                        "xml": {
-                          "wrapped": true
-                        },
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64"
-                            },
-                            "name": {
-                              "type": "string"
-                            }
-                          },
-                          "xml": {
-                            "name": "tag"
-                          }
-                        }
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "pet status in the store",
-                        "enum": [
-                          "available",
-                          "pending",
-                          "sold"
-                        ]
-                      }
-                    },
-                    "xml": {
-                      "name": "pet"
-                    }
-                  }
+                  "$ref": "#/components/schemas/entity_create_error"
                 }
               }
             }
           },
-          "400": {
-            "description": "Invalid tag value"
+          "409": {
+            "description": "Если сработало правило группировки (см. пояснение в разделе Правила группировки), то возвращается соответствующий результат:",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/entity_create_duplicate"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        }
       }
     },
-    "/pet/{petId}": {
+    "/api/entity/search": {
+      "post": {
+        "tags": [
+          "Объект"
+        ],
+        "summary": "Поиск объектов по фильтру",
+        "description": "Метод выполняет поиск объектов, существующих на Платформе, по определенному фильтру. В ответе на запрос возвращаются данные по найденным объектам.",
+        "operationId": "entity_search",
+        "requestBody": {
+          "description": "Структура запроса",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/entity_search"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Структура ответа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/entity_search_success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/entity": {
       "get": {
         "tags": [
-          "pet"
+          "Объект"
         ],
-        "summary": "Find pet by ID",
-        "description": "Returns a single pet",
-        "operationId": "getPetById",
+        "summary": "Получение объекта по его идентификатору",
+        "description": "Метод выполняет поиск объекта по его идентификатору и принимает все значения всех его свойств. В запросе передается идентификатор объекта, который указывается в параметре id. В ответе на запрос возвращаются данные найденного объекта.",
+        "operationId": "entity_by_id",
         "parameters": [
           {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to return",
+            "name": "id",
+            "in": "query",
+            "description": "идентификатор искомого объекта",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1388,971 +150,119 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Структура ответа",
             "content": {
               "application/json": {
                 "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "required": [
-                    "name",
-                    "photoUrls"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "doggie"
-                    },
-                    "category": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "format": "int64",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Dogs"
-                        }
-                      },
-                      "xml": {
-                        "name": "category"
-                      }
-                    },
-                    "photoUrls": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "string",
-                        "xml": {
-                          "name": "photoUrl"
-                        }
-                      }
-                    },
-                    "tags": {
-                      "type": "array",
-                      "xml": {
-                        "wrapped": true
-                      },
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "xml": {
-                          "name": "tag"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "pet status in the store",
-                      "enum": [
-                        "available",
-                        "pending",
-                        "sold"
-                      ]
-                    }
-                  },
-                  "xml": {
-                    "name": "pet"
-                  }
+                  "$ref": "#/components/schemas/entity_search_id_success"
                 }
               }
             }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Updates a pet in the store with form data",
-        "description": "",
-        "operationId": "updatePetWithForm",
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet that needs to be updated",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Name of pet that needs to be updated",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status of pet that needs to be updated",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Deletes a pet",
-        "description": "delete a pet",
-        "operationId": "deletePet",
-        "parameters": [
-          {
-            "name": "api_key",
-            "in": "header",
-            "description": "",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "Pet id to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid pet value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        }
       }
     },
-    "/pet/{petId}/uploadImage": {
-      "post": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "uploads an image",
-        "description": "",
-        "operationId": "uploadFile",
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to update",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "additionalMetadata",
-            "in": "query",
-            "description": "Additional Metadata",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "format": "int32"
-                    },
-                    "type": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "xml": {
-                    "name": "##default"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/store/inventory": {
+    "/api/entity/workflows/{id}": {
       "get": {
         "tags": [
-          "store"
+          "Рабочий процесс"
         ],
-        "summary": "Returns pet inventories by status",
-        "description": "Returns a map of status codes to quantities",
-        "operationId": "getInventory",
+        "summary": "Получение рабочих процессов объекта",
+        "description": "Метод выполняет поиск экземпляров рабочих процессов объекта по его идентификатору. В запросе передается идентификатор объекта, который указывается в параметре id. В ответе возвращаются данные по каждому найденному экземпляру рабочего процесса, по которому проходит объект.",
+        "operationId": "workflows_by_id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "параметр для ввода идентификатора объекта, рабочие процессы которого необходимо получить.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Структура ответа",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
-                  }
+                  "$ref": "#/components/schemas/workflows_id_success"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       }
     },
-    "/store/order": {
+    "/api/entity/update": {
       "post": {
         "tags": [
-          "store"
+          "Объект"
         ],
-        "summary": "Place an order for a pet",
-        "description": "Place a new order in the store",
-        "operationId": "placeOrder",
+        "summary": "Внесение изменений в объект по идентификатору",
+        "description": "Метод вносит изменения в объект, определяемый по его идентификатору. В ответе на запрос возвращается статус внесения изменений.",
+        "operationId": "entity_update",
         "requestBody": {
+          "description": "Структура запроса",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "petId": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 198772
-                  },
-                  "quantity": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 7
-                  },
-                  "shipDate": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Order Status",
-                    "example": "approved",
-                    "enum": [
-                      "placed",
-                      "approved",
-                      "delivered"
-                    ]
-                  },
-                  "complete": {
-                    "type": "boolean"
-                  }
-                },
-                "xml": {
-                  "name": "order"
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "petId": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 198772
-                  },
-                  "quantity": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 7
-                  },
-                  "shipDate": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Order Status",
-                    "example": "approved",
-                    "enum": [
-                      "placed",
-                      "approved",
-                      "delivered"
-                    ]
-                  },
-                  "complete": {
-                    "type": "boolean"
-                  }
-                },
-                "xml": {
-                  "name": "order"
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "petId": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 198772
-                  },
-                  "quantity": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 7
-                  },
-                  "shipDate": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Order Status",
-                    "example": "approved",
-                    "enum": [
-                      "placed",
-                      "approved",
-                      "delivered"
-                    ]
-                  },
-                  "complete": {
-                    "type": "boolean"
-                  }
-                },
-                "xml": {
-                  "name": "order"
-                }
+                "$ref": "#/components/schemas/entity_update"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Структура ответа",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "petId": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 198772
-                    },
-                    "quantity": {
-                      "type": "integer",
-                      "format": "int32",
-                      "example": 7
-                    },
-                    "shipDate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Order Status",
-                      "example": "approved",
-                      "enum": [
-                        "placed",
-                        "approved",
-                        "delivered"
-                      ]
-                    },
-                    "complete": {
-                      "type": "boolean"
-                    }
-                  },
-                  "xml": {
-                    "name": "order"
-                  }
-                }
-              }
-            }
-          },
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
-    },
-    "/store/order/{orderId}": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Find purchase order by ID",
-        "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.",
-        "operationId": "getOrderById",
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of order that needs to be fetched",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "petId": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 198772
-                    },
-                    "quantity": {
-                      "type": "integer",
-                      "format": "int32",
-                      "example": 7
-                    },
-                    "shipDate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Order Status",
-                      "example": "approved",
-                      "enum": [
-                        "placed",
-                        "approved",
-                        "delivered"
-                      ]
-                    },
-                    "complete": {
-                      "type": "boolean"
-                    }
-                  },
-                  "xml": {
-                    "name": "order"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "petId": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 198772
-                    },
-                    "quantity": {
-                      "type": "integer",
-                      "format": "int32",
-                      "example": 7
-                    },
-                    "shipDate": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "Order Status",
-                      "example": "approved",
-                      "enum": [
-                        "placed",
-                        "approved",
-                        "delivered"
-                      ]
-                    },
-                    "complete": {
-                      "type": "boolean"
-                    }
-                  },
-                  "xml": {
-                    "name": "order"
-                  }
+                  "$ref": "#/components/schemas/entity_update_success"
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Order not found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Delete purchase order by ID",
-        "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
-        "operationId": "deleteOrder",
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of the order that needs to be deleted",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
+            "description": "В запросе указан массив идентификаторов объектов. Пример ответа:",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/entity_update_error"
+                }
+              }
             }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Order not found"
           }
         }
       }
     },
-    "/user": {
+    "/api/reference/create": {
       "post": {
         "tags": [
-          "user"
+          "Справочник"
         ],
-        "summary": "Create user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "createUser",
+        "summary": "Создание строки справочника",
+        "description": "Метод создает строку в справочнике с заполненными свойствами. В запросе можно указать свойства и соответствующие значения, с которыми будет создана строка. В ответе на запрос возвращается ID созданной строки. При создании строки к ней применяются правила Автозаполнения, Валидации и Правил группировки, настроенные для соответствующего справочника.",
+        "operationId": "reference_create",
         "requestBody": {
-          "description": "Created user object",
+          "description": "Структура запроса",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
+                "$ref": "#/components/schemas/reference_create"
               }
             }
           }
         },
         "responses": {
-          "default": {
-            "description": "successful operation",
+          "201": {
+            "description": "Структура ответа",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
+                  "$ref": "#/components/schemas/reference_create_success"
                 }
               }
             }
@@ -2360,561 +270,140 @@
         }
       }
     },
-    "/user/createWithList": {
+    "/api/reference/search": {
       "post": {
         "tags": [
-          "user"
+          "Справочник"
         ],
-        "summary": "Creates list of users with given input array",
-        "description": "Creates list of users with given input array",
-        "operationId": "createUsersWithListInput",
+        "summary": "Поиск строк справочника по фильтру",
+        "description": "Метод выполняет поиск строк справочника по фильтру. В ответе на запрос возвращаются данные по найденным строкам справочника.",
+        "operationId": "reference_search",
         "requestBody": {
+          "description": "Структура запроса",
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
-                }
+                "$ref": "#/components/schemas/reference_search"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Successful operation",
+            "description": "Структура ответа",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
+                  "$ref": "#/components/schemas/reference_search_success"
                 }
               }
             }
-          },
-          "default": {
-            "description": "successful operation"
           }
         }
       }
     },
-    "/user/login": {
-      "get": {
+    "/api/reference/row": {
+      "post": {
         "tags": [
-          "user"
+          "Справочник"
         ],
-        "summary": "Logs user into the system",
-        "description": "",
-        "operationId": "loginUser",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "query",
-            "description": "The user name for login",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login in clear text",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "headers": {
-              "X-Rate-Limit": {
-                "description": "calls per hour allowed by the user",
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "X-Expires-After": {
-                "description": "date in UTC when token expires",
-                "schema": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
-            },
-            "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid username/password supplied"
-          }
-        }
-      }
-    },
-    "/user/logout": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Logs out current logged in user session",
-        "description": "",
-        "operationId": "logoutUser",
-        "parameters": [],
-        "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/{username}": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Get user by user name",
-        "description": "",
-        "operationId": "getUserByName",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 10
-                    },
-                    "username": {
-                      "type": "string",
-                      "example": "theUser"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "John"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "James"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@email.com"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "example": "12345"
-                    },
-                    "userStatus": {
-                      "type": "integer",
-                      "description": "User Status",
-                      "format": "int32",
-                      "example": 1
-                    }
-                  },
-                  "xml": {
-                    "name": "user"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid username supplied"
-          },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Update user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "updateUser",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "name that need to be deleted",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "summary": "Получение строки справочника по ее идентификатору",
+        "description": "Метод выполняет поиск строки справочника по ее идентификатору и принимает все значения всех ее свойств. В запросе передается идентификатор строки, который указывается в запросе. В ответе на запрос возвращаются данные найденной строки справочника.",
+        "operationId": "reference_row",
         "requestBody": {
-          "description": "Update an existent user in the store",
+          "description": "Структура запроса",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
+                "$ref": "#/components/schemas/reference_row"
               }
             }
           }
         },
         "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Delete user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "deleteUser",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The name that needs to be deleted",
-            "required": true,
-            "schema": {
-              "type": "string"
+          "200": {
+            "description": "Структура ответа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reference_row_success"
+                }
+              }
             }
           }
+        }
+      }
+    },
+    "/api/reference/update": {
+      "post": {
+        "tags": [
+          "Справочник"
         ],
+        "summary": "Внесение изменений в строку справочника",
+        "description": "Метод вносит изменения в строку справочника. В ответе на запрос возвращается статус внесения изменений.",
+        "operationId": "reference_update",
+        "requestBody": {
+          "description": "Структура запроса",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reference_update"
+              }
+            }
+          }
+        },
         "responses": {
-          "400": {
-            "description": "Invalid username supplied"
+          "200": {
+            "description": "Структура ответа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reference_update_success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workflow/start": {
+      "post": {
+        "tags": [
+          "Рабочий процесс"
+        ],
+        "summary": "Запуск рабочих процессов",
+        "description": "Метод запускает экземпляры рабочих процессов без привязки к объектам.",
+        "operationId": "workflow_start",
+        "requestBody": {
+          "description": "Структура запроса",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/workflow_start"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Структура ответа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workflow_start_success"
+                }
+              }
+            }
           },
-          "404": {
-            "description": "User not found"
+          "400": {
+            "description": "Структура ответа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workflow_start_error"
+                }
+              }
+            }
           }
         }
       }
@@ -2922,533 +411,524 @@
   },
   "components": {
     "schemas": {
-      "Order": {
+      "entity_create": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
-          },
-          "petId": {
-            "type": "integer",
-            "format": "int64",
-            "example": 198772
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32",
-            "example": 7
-          },
-          "shipDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "description": "Order Status",
-            "example": "approved",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
-          },
-          "complete": {
-            "type": "boolean"
-          }
-        },
-        "xml": {
-          "name": "order"
-        }
-      },
-      "Customer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 100000
-          },
-          "username": {
-            "type": "string",
-            "example": "fehguy"
-          },
-          "address": {
-            "type": "array",
-            "xml": {
-              "name": "addresses",
-              "wrapped": true
-            },
-            "items": {
-              "type": "object",
-              "properties": {
-                "street": {
-                  "type": "string",
-                  "example": "437 Lytton"
-                },
-                "city": {
-                  "type": "string",
-                  "example": "Palo Alto"
-                },
-                "state": {
-                  "type": "string",
-                  "example": "CA"
-                },
-                "zip": {
-                  "type": "string",
-                  "example": "94301"
-                }
-              },
-              "xml": {
-                "name": "address"
-              }
-            }
-          }
-        },
-        "xml": {
-          "name": "customer"
-        }
-      },
-      "Address": {
-        "type": "object",
-        "properties": {
-          "street": {
-            "type": "string",
-            "example": "437 Lytton"
-          },
-          "city": {
-            "type": "string",
-            "example": "Palo Alto"
-          },
-          "state": {
-            "type": "string",
-            "example": "CA"
-          },
-          "zip": {
-            "type": "string",
-            "example": "94301"
-          }
-        },
-        "xml": {
-          "name": "address"
-        }
-      },
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 1
-          },
-          "name": {
-            "type": "string",
-            "example": "Dogs"
-          }
-        },
-        "xml": {
-          "name": "category"
-        }
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
-          },
-          "username": {
-            "type": "string",
-            "example": "theUser"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "James"
-          },
-          "email": {
-            "type": "string",
-            "example": "john@email.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "12345"
-          },
-          "phone": {
-            "type": "string",
-            "example": "12345"
-          },
-          "userStatus": {
-            "type": "integer",
-            "description": "User Status",
-            "format": "int32",
-            "example": 1
-          }
-        },
-        "xml": {
-          "name": "user"
-        }
-      },
-      "Tag": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "tag"
-        }
-      },
-      "Pet": {
-        "required": [
-          "name",
-          "photoUrls"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
-          },
-          "name": {
-            "type": "string",
-            "example": "doggie"
-          },
-          "category": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "format": "int64",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "example": "Dogs"
-              }
-            },
-            "xml": {
-              "name": "category"
-            }
-          },
-          "photoUrls": {
-            "type": "array",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "type": "string",
-              "xml": {
-                "name": "photoUrl"
-              }
-            }
-          },
-          "tags": {
-            "type": "array",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "name": {
-                  "type": "string"
-                }
-              },
-              "xml": {
-                "name": "tag"
-              }
-            }
-          },
-          "status": {
-            "type": "string",
-            "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
-          }
-        },
-        "xml": {
-          "name": "pet"
-        }
-      },
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
           "type": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "##default"
-        }
-      }
-    },
-    "requestBodies": {
-      "Pet": {
-        "description": "Pet object that needs to be added to the store",
-        "content": {
-          "application/json": {
-            "schema": {
-              "required": [
-                "name",
-                "photoUrls"
+            "type": "string",
+            "description": "Указывается тип объекта, который будет создан",
+            "example": {
+              "name": "Название типа объекта",
+              "path": [
+                "Группа типов объектов 1",
+                "Подгруппа типов объектов 1"
               ],
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "format": "int64",
-                  "example": 10
-                },
-                "name": {
-                  "type": "string",
-                  "example": "doggie"
-                },
-                "category": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "Dogs"
-                    }
-                  },
-                  "xml": {
-                    "name": "category"
-                  }
-                },
-                "photoUrls": {
-                  "type": "array",
-                  "xml": {
-                    "wrapped": true
-                  },
-                  "items": {
-                    "type": "string",
-                    "xml": {
-                      "name": "photoUrl"
-                    }
-                  }
-                },
-                "tags": {
-                  "type": "array",
-                  "xml": {
-                    "wrapped": true
-                  },
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    },
-                    "xml": {
-                      "name": "tag"
-                    }
-                  }
-                },
-                "status": {
-                  "type": "string",
-                  "description": "pet status in the store",
-                  "enum": [
-                    "available",
-                    "pending",
-                    "sold"
-                  ]
-                }
-              },
-              "xml": {
-                "name": "pet"
-              }
+              "id": 1
             }
           },
-          "application/xml": {
-            "schema": {
-              "required": [
-                "name",
-                "photoUrls"
-              ],
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "format": "int64",
-                  "example": 10
-                },
-                "name": {
-                  "type": "string",
-                  "example": "doggie"
-                },
-                "category": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "example": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "Dogs"
-                    }
-                  },
-                  "xml": {
-                    "name": "category"
-                  }
-                },
-                "photoUrls": {
-                  "type": "array",
-                  "xml": {
-                    "wrapped": true
-                  },
-                  "items": {
-                    "type": "string",
-                    "xml": {
-                      "name": "photoUrl"
-                    }
-                  }
-                },
-                "tags": {
-                  "type": "array",
-                  "xml": {
-                    "wrapped": true
-                  },
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    },
-                    "xml": {
-                      "name": "tag"
-                    }
-                  }
-                },
-                "status": {
-                  "type": "string",
-                  "description": "pet status in the store",
-                  "enum": [
-                    "available",
-                    "pending",
-                    "sold"
-                  ]
-                }
+          "properties": {
+            "type": "string",
+            "description": "Указываются свойства и значения для заполнения создаваемого объекта. Важно! Встроенные свойства объекта Id, Создатель, Создан (дата создания объекта), Тип — заполняются автоматически при создании объекта на Платформе. При попытке заполнения данных свойств (вводе в данном разделе properties) запрос не выполнится, вернется ошибка.",
+            "example": [
+              {
+                "name": "Название типа объекта",
+                "path": [
+                  "Группа свойств 1",
+                  "Подгруппа свойств 1"
+                ],
+                "id": 1,
+                "value": "Текстовое значение",
+                "filter": "{...}"
               },
-              "xml": {
-                "name": "pet"
+              "..."
+            ]
+          },
+          "workflows": {
+            "type": "string",
+            "description": "Указываются шаблоны рабочих процессов, по экземплярам которых необходимо запустить новый объект после его создания",
+            "example": [
+              {
+                "id": 2,
+                "name": "Обработка инцидента",
+                "path": [
+                  "Группа шаблона рабочих процессов",
+                  "Подгруппа шаблона рабочих процессов"
+                ]
+              },
+              {
+                "id": 3,
+                "name": "Обработка инцидента",
+                "path": [
+                  "Группа шаблона рабочих процессов",
+                  "Подгруппа шаблона рабочих процессов"
+                ]
+              },
+              "..."
+            ]
+          },
+          "inputs": {
+            "type": "string",
+            "description": "Значения для входных параметров рабочих процессов. Если название и тип данных одного из входных параметров из разных шаблонов рабочих процессов совпадают, то такой входной параметр будет перезаписан одним и тем же указанным значением для всех экземпляров рабочих процессов, сформированных из разных шаблонов.",
+            "example": [
+              {
+                "name": "Название входного параметра №1",
+                "value": "Значение входного параметра №1"
               }
-            }
+            ]
           }
         }
       },
-      "UserArray": {
-        "description": "List of user object",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 10
-                  },
-                  "username": {
-                    "type": "string",
-                    "example": "theUser"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "John"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "James"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "example": "12345"
-                  },
-                  "userStatus": {
-                    "type": "integer",
-                    "description": "User Status",
-                    "format": "int32",
-                    "example": 1
-                  }
-                },
-                "xml": {
-                  "name": "user"
-                }
-              }
-            }
-          }
+      "entity_create_success": {
+        "type": "string",
+        "example": {
+          "result": "success",
+          "id": 1
         }
-      }
-    },
-    "securitySchemes": {
-      "petstore_auth": {
-        "type": "oauth2",
-        "flows": {
-          "implicit": {
-            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
-            "scopes": {
-              "write:pets": "modify pets in your account",
-              "read:pets": "read your pets"
+      },
+      "entity_create_duplicate": {
+        "type": "string",
+        "example": {
+          "result": "duplicate"
+        }
+      },
+      "entity_create_error": {
+        "type": "string",
+        "example": {
+          "result": "error",
+          "inputsToFill": [
+            {
+              "name": "input1",
+              "dataType": "String"
             }
+          ]
+        }
+      },
+      "entity_search": {
+        "type": "object",
+        "properties": {
+          "skip": {
+            "type": "integer",
+            "description": "Пропускается определенное количество первых найденных объектов: будут взяты объекты, следующие за первыми полученными объектами",
+            "example": 0
+          },
+          "top": {
+            "type": "integer",
+            "description": "Ограничивается максимальное количество получаемых объектов",
+            "example": 20
+          },
+          "sort": {
+            "type": "string",
+            "description": "Определяются свойства, по которым будет выполняться сортировка полученных объектов. Для каждого свойства обязательно следует указывать направление сортировки — см. ниже ключ direction",
+            "example": {
+              "id": 1,
+              "name": "Навание свойства",
+              "path": [
+                "Группа свойства",
+                "Подгруппа свойства"
+              ],
+              "direction": "desc"
+            }
+          },
+          "outputproperties": {
+            "type": "string",
+            "description": "Определяются свойства, значения которых будут запрашиваться по каждому найденному объекту. Если не указано ни одного свойства, то вернется только идентификатор по каждому найденному объекту",
+            "example": [
+              {
+                "id": 150
+              },
+              {
+                "name": "Навание свойства",
+                "path": [
+                  "Группа свойства",
+                  "Подгруппа свойства"
+                ]
+              }
+            ]
+          },
+          "filter": {
+            "type": "string",
+            "description": "Указывается фильтр для получения определенных объектов. Структуру полей фильтра см. в разделе Фильтр в методах API",
+            "example": "{...}"
           }
         }
       },
-      "api_key": {
-        "type": "apiKey",
-        "name": "api_key",
-        "in": "header"
+      "entity_search_success": {
+        "type": "string",
+        "example": {
+          "totalcount": 200,
+          "count": 20,
+          "result": [
+            {
+              "id": 1,
+              "properties": [
+                {
+                  "id": 123,
+                  "name": "Название свойства №1",
+                  "path": [
+                    "Группа",
+                    "Подгруппа"
+                  ],
+                  "value": "Значение 1"
+                },
+                {
+                  "id": 124,
+                  "name": "Название свойства №2 типа Ссылка на справочник",
+                  "path": [
+                    "Группа",
+                    "Подгруппа"
+                  ],
+                  "value": [
+                    {
+                      "id": 1,
+                      "Статус": "Новый",
+                      "Цвет": "#FF0000"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "entity_search_id_success": {
+        "type": "string",
+        "example": {
+          "type": {
+            "id": 55,
+            "name": "Название типа объекта",
+            "path": [
+              "Группа типа объекта",
+              "Подгруппа типа объекта"
+            ]
+          },
+          "properties": [
+            {
+              "id": 123,
+              "name": "Название свойства №1",
+              "path": [
+                "Группа свойства объекта",
+                "Подгруппа свойства объекта"
+              ],
+              "value": "Значение"
+            },
+            {
+              "id": 123,
+              "name": "Название свойства №2 типа Ссылка на справочник",
+              "path": [
+                "Группа свойства объекта",
+                "Подгруппа свойства объекта"
+              ],
+              "value": [
+                {
+                  "id": 2,
+                  "Статус": "В работе",
+                  "Цвет": "#00FF00"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "workflows_id_success": {
+        "type": "object",
+        "description": "Список рабочих процессов объекта",
+        "properties": {
+          "workflows": {
+            "type": "string",
+            "description": "Определяются свойства, по которым будет выполняться сортировка полученных объектов. Для каждого свойства обязательно следует указывать направление сортировки — см. ниже ключ direction",
+            "example": [
+              {
+                "id": 1000,
+                "name": "Название шаблона рабочего процесса",
+                "path": [
+                  "Группа шаблона рабочего процесса",
+                  "Подгруппа шаблона рабочего процесса"
+                ],
+                "status": "Finished",
+                "state": "Состояние РП 1",
+                "instanceId": 3232123
+              }
+            ]
+          }
+        }
+      },
+      "entity_update": {
+        "type": "string",
+        "example": {
+          "id": 793,
+          "properties": [
+            {
+              "id": 9,
+              "path": [
+                "Свойства объекта"
+              ],
+              "value": "Текст_1",
+              "valueaction": "overwrite",
+              "unique": false
+            },
+            "..."
+          ]
+        }
+      },
+      "entity_update_success": {
+        "type": "string",
+        "example": {
+          "result": "success",
+          "changed": "true"
+        }
+      },
+      "entity_update_error": {
+        "type": "string",
+        "example": [
+          {
+            "error": {
+              "code": "SV_SECURITY_NO_PERMISSION",
+              "args": [],
+              "context": [],
+              "stackTrace": null,
+              "message": null,
+              "inner": null
+            },
+            "result": "error",
+            "changed": false,
+            "id": 2323231231237
+          },
+          {
+            "result": "success",
+            "changed": false,
+            "id": 3197804
+          },
+          {
+            "result": "success",
+            "changed": false,
+            "id": 3197805
+          }
+        ]
+      },
+      "reference_create": {
+        "type": "string",
+        "example": {
+          "reference": {
+            "name": "Название справочника",
+            "path": [
+              "Группа справочника",
+              "Подгруппа справочника"
+            ],
+            "id": 1
+          },
+          "properties": [
+            {
+              "name": "Название свойства",
+              "value": 2,
+              "filter": {
+                "type": "Тип свойства",
+                "name": "Название свойства",
+                "operator": "equal",
+                "value": "Значение свойства"
+              }
+            }
+          ]
+        }
+      },
+      "reference_create_success": {
+        "type": "string",
+        "example": {
+          "result": "success",
+          "id": 4
+        }
+      },
+      "reference_search": {
+        "type": "string",
+        "example": {
+          "reference": {
+            "name": "Название справочника",
+            "path": [
+              "Группа справочника",
+              "Подгруппа справочника"
+            ],
+            "id": 1
+          },
+          "skip": 0,
+          "top": 3,
+          "sort": [
+            {
+              "name": "Название свойства",
+              "id": 100,
+              "direction": "desc"
+            }
+          ],
+          "outputproperties": [
+            {
+              "name": "Название свойства",
+              "id": 100
+            }
+          ],
+          "filter": {
+            "...": null
+          }
+        }
+      },
+      "reference_search_success": {
+        "type": "string",
+        "example": {
+          "totalCount": 10,
+          "count": 1,
+          "result": [
+            {
+              "id": 1,
+              "properties": [
+                {
+                  "value": 1,
+                  "id": 228,
+                  "name": "Название свойства",
+                  "path": null
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "reference_row": {
+        "type": "string",
+        "example": {
+          "name": "Название справочника",
+          "path": [
+            "Группа справочника",
+            "Подгруппа справочника"
+          ],
+          "id": 1,
+          "rowid": 1
+        }
+      },
+      "reference_row_success": {
+        "type": "string",
+        "example": {
+          "properties": [
+            {
+              "value": 1,
+              "id": 138,
+              "name": "Id",
+              "path": null
+            },
+            {
+              "value": 18.55496,
+              "id": 139,
+              "name": "Долгота (X)",
+              "path": null
+            },
+            {
+              "value": "Банги",
+              "id": 140,
+              "name": "Наименование",
+              "path": null
+            },
+            {
+              "value": 4.36122,
+              "id": 141,
+              "name": "Широта (Y)",
+              "path": null
+            },
+            {
+              "value": null,
+              "id": 199,
+              "name": "Новое свойство 1",
+              "path": null
+            }
+          ]
+        }
+      },
+      "reference_update": {
+        "type": "string",
+        "example": {
+          "reference": {
+            "name": "Название справочника",
+            "path": [
+              "Группа справочника",
+              "Подгруппа справочника"
+            ],
+            "id": 1,
+            "rowid": 19
+          },
+          "properties": [
+            {
+              "name": "Название свойства",
+              "value": 2,
+              "valueaction": "overwrite",
+              "filter": {
+                "type": "property",
+                "name": "Название свойства",
+                "operator": "equal",
+                "value": "Значение"
+              }
+            }
+          ]
+        }
+      },
+      "reference_update_success": {
+        "type": "string",
+        "example": {
+          "result": "success"
+        }
+      },
+      "workflow_start": {
+        "type": "string",
+        "example": {
+          "workflows": [
+            {
+              "path": [
+                "Группа",
+                "Подгруппа"
+              ],
+              "name": "Шаблон рабочего процесса №1"
+            },
+            {
+              "path": [
+                "Группа",
+                "Подгруппа"
+              ],
+              "name": "Шаблон рабочего процесса №2"
+            },
+            {
+              "path": [
+                "Группа",
+                "Подгруппа"
+              ],
+              "name": "Шаблон рабочего процесса №3"
+            },
+            {
+              "path": [
+                "Группа",
+                "Подгруппа"
+              ],
+              "name": "Шаблон рабочего процесса №4"
+            }
+          ],
+          "inputs": [
+            {
+              "name": "Название входного параметра №1",
+              "value": "Значение входного параметра №1"
+            }
+          ]
+        }
+      },
+      "workflow_start_success": {
+        "type": "string",
+        "example": {
+          "result": "success",
+          "inputsToFill": null
+        }
+      },
+      "workflow_start_error": {
+        "type": "string",
+        "example": {
+          "result": "error",
+          "inputsToFill": [
+            {
+              "name": "input1",
+              "dataType": "String"
+            }
+          ]
+        }
       }
     }
   }
