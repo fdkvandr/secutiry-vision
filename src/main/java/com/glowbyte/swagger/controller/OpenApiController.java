@@ -12,6 +12,6 @@ public class OpenApiController {
 
     @GetMapping("/api-docs")
     public String get() throws IOException {
-        return new String(Files.readAllBytes(Paths.get("src/main/resources/openapi.json")));
+        return new String(Files.readAllBytes(Paths.get("./openapi.json")));
     }
 }
