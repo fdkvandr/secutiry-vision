@@ -7,3 +7,6 @@ springdoc:
   swagger-ui:
     url: api-docs
     disable-swagger-default-url: true
+logging:
+  level:
+    org.springframework.web: TRACE
