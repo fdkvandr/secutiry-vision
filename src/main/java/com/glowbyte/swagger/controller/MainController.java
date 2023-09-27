@@ -17,13 +17,13 @@ public class MainController {
     private final MainService mainService;
 
     @GetMapping
-    public ResponseEntity<?> getMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) {
+    public ResponseEntity<String> getMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) {
         String pathWithParameters = httpServletRequest.getServletPath().concat("?").concat(httpServletRequest.getQueryString());
         return mainService.getMethod(pathWithParameters, token);
     }
 
     @PostMapping
-    public ResponseEntity<?> postMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) throws IOException {
+    public ResponseEntity<String> postMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) throws IOException {
         String pathWithParameters = httpServletRequest.getServletPath().concat("?").concat(httpServletRequest.getQueryString());
         String request = httpServletRequest.getReader().lines().collect(Collectors.joining());
         return mainService.postMethod(pathWithParameters, request, token);
