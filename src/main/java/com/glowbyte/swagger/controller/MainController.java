@@ -18,14 +18,20 @@ public class MainController {
 
     @GetMapping
     public ResponseEntity<String> getMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) {
-        String pathWithParameters = httpServletRequest.getServletPath().concat("?").concat(httpServletRequest.getQueryString());
+        String pathWithParameters = getPathWithParameters(httpServletRequest);
         return mainService.getMethod(pathWithParameters, token);
     }
 
     @PostMapping
     public ResponseEntity<String> postMethod(HttpServletRequest httpServletRequest, @RequestHeader(name = "sv-token") String token) throws IOException {
-        String pathWithParameters = httpServletRequest.getServletPath().concat("?").concat(httpServletRequest.getQueryString());
+        String pathWithParameters = getPathWithParameters(httpServletRequest);
         String request = httpServletRequest.getReader().lines().collect(Collectors.joining());
         return mainService.postMethod(pathWithParameters, request, token);
+    }
+
+    private String getPathWithParameters(HttpServletRequest httpServletRequest) {
+        String path = httpServletRequest.getServletPath();
+        String parameters = httpServletRequest.getQueryString();
+        return parameters == null ? path : path.concat("?").concat(parameters);
     }
 }

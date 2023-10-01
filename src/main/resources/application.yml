@@ -1,8 +1,10 @@
 server:
   port: 10000
-
-sv-param:
-  default-url: https://158.160.23.243:8080
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:ssl/cv5_ssl.pfx
+    key-store-password: sv5-root
 springdoc:
   swagger-ui:
     url: api-docs
@@ -10,3 +12,5 @@ springdoc:
 logging:
   level:
     org.springframework.web: TRACE
+sv-param:
+  default-url: https://158.160.23.243:8080
